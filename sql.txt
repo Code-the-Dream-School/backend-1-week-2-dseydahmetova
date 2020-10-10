@@ -6,8 +6,7 @@ Paste the SQL statement you used below.
 SELECT od.OrderID,  p.ProductName, od.Quantity
 FROM OrderDetails AS od
 INNER JOIN 
-(SELECT ProductName, ProductID
-FROM Products) AS p
+Products AS p
 ON od.ProductID = p.ProductID;
 
 
@@ -17,13 +16,11 @@ Paste the SQL statement you used below.
 
 SELECT e.LastName || " " || e.FirstName AS EmployeeName, od.ProductID, SUM(od.Quantity) AS Quantity
 FROM Orders AS o
-LEFT OUTER JOIN 
-(SELECT OrderID, ProductID, Quantity
-FROM OrderDetails) AS od
+INNER JOIN 
+OrderDetails AS od
 ON od.OrderID = o.OrderID
-LEFT OUTER JOIN 
-(SELECT EmployeeID, LastName, FirstName
-FROM Employees) AS e
+INNER JOIN 
+Employees AS e
 ON e.EmployeeID = o.EmployeeID
 GROUP BY EmployeeName, ProductID
 ORDER BY EmployeeName;
